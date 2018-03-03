@@ -93,7 +93,7 @@ class SprintController extends Controller
             ->with('notes')
             ->first();
 
-        if (!count($sprint)) {
+        if (is_null($sprint)) {
             return redirect()->route('sprints.index');
         }
 
