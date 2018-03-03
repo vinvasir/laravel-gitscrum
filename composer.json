@@ -24,16 +24,17 @@
     ],
     "require": {
         "php": ">=7.1",
+        "doctrine/dbal": "^2.6",
         "laravel/framework": "5.5.*",
         "maknz/slack": "^1.7",
         "nesbot/carbon": "^1.21",
+        "pda/pheanstalk": "^3.1",
         "phploc/phploc": "*",
         "renatomarinho/laravel-multi-language": ">=1.0.0",
         "renatomarinho/laravel-page-speed": "^1.8",
         "socialiteproviders/gitlab": "^3.0",
-        "tymon/jwt-auth": "0.5.*",
         "spatie/laravel-fractal": "^5.2",
-        "doctrine/dbal": "^2.6"
+        "tymon/jwt-auth": "0.5.*"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
