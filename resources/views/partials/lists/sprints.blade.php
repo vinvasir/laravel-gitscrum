@@ -19,7 +19,7 @@
 
     @if(!isset($list->column) || in_array('tbody_sprintBacklog', $list->column))
         <td>
-            <a href="{{route('sprints.show', ['slug'=>$list->slug])}}">
+            <a href="{{route('issues.index', ['slug'=>$list->slug])}}">
                 {{$list->title}}
             </a>
             <div class="details">
