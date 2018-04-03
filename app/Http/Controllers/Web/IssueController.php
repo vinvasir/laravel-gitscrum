@@ -20,7 +20,7 @@ class IssueController extends Controller
         [$sprint,$issues] = $this->sprintWithIssues($slug);
 
         if (is_null($sprint)) {
-            return redirect()->route('sprints.index');
+            return redirect('/sprints/list?scope=open');
         }
 
         return view('issues.index')
