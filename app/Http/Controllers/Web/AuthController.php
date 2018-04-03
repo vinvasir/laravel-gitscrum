@@ -57,6 +57,6 @@ class AuthController extends Controller
 
         Auth::loginUsingId($user->id);
 
-        return redirect()->route('sprints.index');
+        return redirect()->route('issues.index', ['slug' => 0]);
     }
 }
