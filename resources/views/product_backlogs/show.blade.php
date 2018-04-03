@@ -60,14 +60,14 @@
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#tab-userStories">{{trans('gitscrum.user-stories')}}
                     ({{$productBacklog->userStories->count()}})</a></li>
-            <li class=""><a data-toggle="tab" href="#tab-sprints">{{trans('gitscrum.sprint-backlogs')}}
-                    ({{$productBacklog->sprints->count()
+            <li class=""><a data-toggle="tab" href="#tab-sprints">{{trans('gitscrum.open-sprints')}}
+                    ({{$openSprints->count()
             }})</a></li>
+            <li class=""><a data-toggle="tab" href="#tab-branches">{{trans('gitscrum.closed-sprints')}}
+                    ({{$closedSprints->count()
+            }})</a></li>            
             <li class=""><a data-toggle="tab" href="#tab-comments">{{trans('gitscrum.comments')}}
                     ({{$productBacklog->comments->count
-            ()}})</a></li>
-            <li class=""><a data-toggle="tab" href="#tab-branches">{{trans('gitscrum.branches')}}
-                    ({{$productBacklog->branches->count
             ()}})</a></li>
         </ul>
         <div class="tab-content">
@@ -84,7 +84,7 @@
             <div id="tab-sprints" class="tab-pane">
                 <div class="panel-body">
                     @include('partials.boxes.search-min', ['txtSearch' => trans('gitscrum.search-by-sprint-backlogs')])
-                    @include('partials.boxes.sprint', [ 'list' => $sprints ])
+                    @include('partials.boxes.sprint', [ 'list' => $openSprints ])
                 </div>
             </div>
             <div id="tab-comments" class="tab-pane">
@@ -96,7 +96,7 @@
             <div id="tab-branches" class="tab-pane">
                 <div class="panel-body">
 
-                    @include('partials.boxes.branch', [ 'list' => $productBacklog->branches ])
+                    @include('partials.boxes.sprint', [ 'list' => $closedSprints ])
 
                 </div>
             </div>

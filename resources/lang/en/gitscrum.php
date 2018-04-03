@@ -134,6 +134,8 @@ return array (
   'edit-product-backlog' => 'Edit Product Backlog',
   'create-user-story' => 'Create User Story',
   'clone-using-ssh-or-https' => 'Clone using ssh or https',
+  'open-sprints' => 'Current Sprints',
+  'closed-sprints' => 'Closed Sprints',
   'sprint-backlogs' => 'Sprint Backlogs',
   'branches' => 'Branches',
   'search-by-user-stories' => 'Search by user stories',

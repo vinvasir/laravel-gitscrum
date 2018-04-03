@@ -61,7 +61,16 @@ class ProductBacklogController extends Controller
             ->with('userStories')
             ->first();
 
-        $sprints = $productBacklog->sprints()
+        $openSprints = $productBacklog->sprints()
+            ->where('config_status_id', 6)
+            ->with('productBacklog')
+            ->with('favorite')
+            ->with('issues.users')
+            ->with('issues')
+            ->paginate(env('APP_PAGINATE'));
+
+        $closedSprints = $productBacklog->sprints()
+            ->where('config_status_id', '!=', 6)
             ->with('productBacklog')
             ->with('favorite')
             ->with('issues.users')
@@ -80,7 +89,8 @@ class ProductBacklogController extends Controller
 
         return view('product_backlogs.show')
             ->with('productBacklog', $productBacklog)
-            ->with('sprints', $sprints)
+            ->with('openSprints', $openSprints)
+            ->with('closedSprints', $closedSprints)
             ->with('userStories', $userStories)
             ->with('search', (!isset($search)) ? null : $search);
     }
