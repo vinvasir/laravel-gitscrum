@@ -61,20 +61,12 @@ class ProductBacklogController extends Controller
             ->with('userStories')
             ->first();
 
-        $openSprints = $productBacklog->sprints()
+        $openSprints = $this->eagerLoadSprintsFor($productBacklog)
             ->where('config_status_id', 6)
-            ->with('productBacklog')
-            ->with('favorite')
-            ->with('issues.users')
-            ->with('issues')
             ->paginate(env('APP_PAGINATE'));
 
-        $closedSprints = $productBacklog->sprints()
+        $closedSprints = $this->eagerLoadSprintsFor($productBacklog)
             ->where('config_status_id', '!=', 6)
-            ->with('productBacklog')
-            ->with('favorite')
-            ->with('issues.users')
-            ->with('issues')
             ->paginate(env('APP_PAGINATE'));
 
         $userStories = $productBacklog->userStories();
@@ -137,5 +129,14 @@ class ProductBacklogController extends Controller
      */
     public function destroy($id)
     {
+    }
+
+    private function eagerLoadSprintsFor($productBacklog)
+    {
+        return $productBacklog->sprints()
+                    ->with('productBacklog')
+                    ->with('favorite')
+                    ->with('issues.users')
+                    ->with('issues');
     }
 }
