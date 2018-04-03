@@ -16,9 +16,15 @@ class SprintController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($mode = 'default', $slug_product_backlog = null)
+    public function index($mode = 'default', $slug_product_backlog = null, Request $request)
     {
-        $sprints = Sprint::order();
+        if(!is_null($request->query('scope'))) {
+            $status_ids = ConfigStatus::where('title', 'Open')->pluck('id');
+            
+            $sprints = Sprint::where('config_status_id', $status_ids)->order();
+        } else {
+            $sprints = Sprint::order();
+        }
 
         if (!is_null($slug_product_backlog)) {
             $sprints = $sprints->join('product_backlogs', 'product_backlogs.id', 'sprints.product_backlog_id')
