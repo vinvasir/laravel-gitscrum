@@ -2,12 +2,13 @@
 
 namespace GitScrum\Models;
 
+use GitScrum\Models\Sprint;
+use GitScrum\Presenters\GlobalPresenter;
 use GitScrum\Presenters\UserPresenter;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use GitScrum\Scopes\GlobalScope;
 use GitScrum\Scopes\UserScope;
-use GitScrum\Presenters\GlobalPresenter;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,11 @@ class User extends Authenticatable
     public function configStatuses()
     {
         return $this->belongsToMany(ConfigStatus::class, 'statuses', 'user_id', 'id');
+    }
+
+    public function primarySprint()
+    {
+        return $this->belongsTo(Sprint::class);
     }
 
     public function issues()
