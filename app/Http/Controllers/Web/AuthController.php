@@ -2,12 +2,13 @@
 
 namespace GitScrum\Http\Controllers\Web;
 
-use GitScrum\Http\Requests\AuthRequest;
-use GitScrum\Models\User;
-use Socialite;
 use Auth;
-use SocialiteProviders\Manager\Exception\InvalidArgumentException;
+use GitScrum\Http\Requests\AuthRequest;
+use GitScrum\Models\Sprint;
+use GitScrum\Models\User;
 use Session;
+use Socialite;
+use SocialiteProviders\Manager\Exception\InvalidArgumentException;
 
 class AuthController extends Controller
 {
@@ -56,6 +57,10 @@ class AuthController extends Controller
         $user = User::updateOrCreate(['provider_id' => $data['provider_id']], $data);
 
         Auth::loginUsingId($user->id);
+
+        if ($user->sprint_id) {
+            return redirect()->route('issues.index', ['slug' => Sprint::find($user->sprint_id)->slug]);
+        }
 
         return redirect()->route('issues.index', ['slug' => 0]);
     }
